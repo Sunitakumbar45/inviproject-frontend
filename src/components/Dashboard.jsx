@@ -1,17 +1,16 @@
-import { useContext } from "react"
-import UserContext from "../context/UserContext"
+import { useContext } from "react";
+import UserContext from "../context/UserContext";
 
-export default function Dashboard(){
-    const{user}=useContext(UserContext);
-    if(!user){
-        return <p>loading...</p>
-    }
+export default function Dashboard() {
+  const { user } = useContext(UserContext);
 
-    return(
-        <div>
-            <h2>Dashboard page</h2>  
-            <p>welcome ,{user?.name}</p>
-            
-        </div>
-    )
+  if (!user) return <p>Loading...</p>;
+
+  return (
+    <div className="page">
+      <h2>Dashboard</h2>
+      <p>Welcome, {user.name}</p>
+      <p>Role: {user.role}</p>
+    </div>
+  );
 }

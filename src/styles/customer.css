@@ -1,0 +1,25 @@
+.customer-container {
+  background: #020617;
+  min-height: 100vh;
+  color: #f8fafc;
+  padding: 40px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+}
+.error-box {
+  background: #ffe5e5;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin: 0;
+}

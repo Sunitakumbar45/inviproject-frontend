@@ -13,6 +13,10 @@ const userReducer=(state,action)=>{
         case "SET_SERVER_ERRORS":{
             return{...state,serverErrors:action.payload}
         }
+        case "CLEAR_SERVER_ERRORS": {
+           return { ...state, serverErrors: "" };
+        }
+
         default:{
             return{...state}
         }
@@ -44,12 +48,14 @@ export default function AuthProvider(props){
     },[])
 
     const handleRegister=async(formData,resetForm)=>{
+       userDispatch({ type: "CLEAR_SERVER_ERRORS" });
         try{
             const response=await axios.post('/user/register',formData);
             console.log(response.data);
             alert("succesfully register");
             resetForm();
             userDispatch({type:"SET_SERVER_ERRORS",payload:''})
+           
             navigate('/login');
         }catch(err){
             console.log(err.message.data);
@@ -58,16 +64,37 @@ export default function AuthProvider(props){
      }
 
      const handleLogin=async(formData,resetForm)=>{
+      userDispatch({ type: "CLEAR_SERVER_ERRORS" });
         try{
             const response=await axios.post('/user/login',formData);
             // console.log(response.data);
             localStorage.setItem('token',response.data.token);
             const userResponse=await axios.get('/user/account',{headers :{Authorization:localStorage.getItem('token')}});
+            
+            
             // console.log(userResponse.data);
             resetForm();
             alert("successfully login");
+            
             userDispatch({type:"LOGIN",payload:userResponse.data})
-            navigate('/dashboard');
+            
+            // AFTER userDispatch({type:"LOGIN", payload: userResponse.data})
+            // AFTER userResponse.data is received
+const loggedInUser = userResponse.data;
+
+userDispatch({ type: "LOGIN", payload: loggedInUser });
+// userDispatch({ type: "CLEAR_SERVER_ERRORS" });
+
+// 🔥 ROLE BASED REDIRECT
+if (loggedInUser.role === "admin") {
+  navigate("/admin/dashboard");
+} else {
+  navigate("/customer/dashboard");
+}
+
+            
+
+            // navigate('/dashboard');
 
         }catch(err){
             // console.log(err);
@@ -87,3 +114,7 @@ export default function AuthProvider(props){
         
     )
 }  
+
+
+
+

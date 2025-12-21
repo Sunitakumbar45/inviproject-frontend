@@ -8,21 +8,34 @@ import Registration from "./components/Registration";
 import {Routes,Route, Link}from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "./context/UserContext";
+import AdminDashboard from "./components/AdminDashboard";
+import CustomerDashboard from "./components/CustomerDashboard";
 
 export default function App(){
-  const{isloggedIn,handleLogout}=useContext(UserContext);
+  const{isloggedIn,handleLogout,user}=useContext(UserContext);   
   return(
-      <div>
-      <h2>Invitation Card printing App</h2>
+      <div className="app-container">
+      <h2>Invitation Card printing </h2>
       <ul>
         <li><Link to="/">    Home  </Link></li>
+        {isloggedIn && user?.role === "admin" && (
+  <li><Link to="/admin/dashboard">Admin Dashboard</Link></li>
+)}
+
+{isloggedIn && user?.role === "customer" && (
+  <li><Link to="/customer/dashboard">Customer Dashboard</Link></li>
+)}
+
         {isloggedIn &&(
           <>
-          <li><Link to="/dashboard"> Dashboard </Link></li>
+          {/* <li><Link to="/dashboard"> Dashboard </Link></li> */}
           <li><Link to="/account"> Account </Link></li>
-          <li><button onClick={handleLogout}>logout</button></li>
+          
+          {/* <li><button onClick={handleLogout}>logout</button></li> */}
           </>
         )}
+
+        
           
         {!isloggedIn&&(
             <>
@@ -34,24 +47,25 @@ export default function App(){
    
       <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/dashboard" element={<Dashboard/>}/>
+      {/* <Route path="/dashboard" element={<Dashboard/>}/> */}
       <Route path="/account" element={<Account/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/logout" element={<Logout/>}/>
+      {/* <Route path="/logout" element={<Logout/>}/> */}
       <Route path="/register" element={<Registration/>}/>
+      <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
+      <Route path="/customer/dashboard" element={<CustomerDashboard/>}/> 
       </Routes>
-      </div>
-      )
-    }
-
-
-
-
-
-
-
-
-
+      {isloggedIn && (
+        <div className="logout-footer">
+          <button onClick={handleLogout} className="logout-btn">
+            Logout
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+      
 
 
 

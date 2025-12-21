@@ -1,8 +1,12 @@
 import {useFormik} from "formik";
 import UserContext from "../context/UserContext";
 import { useContext } from "react";
+import { useState } from "react";
 export default function Registration(){
     const {handleRegister,serverErrors}=useContext(UserContext);
+    const [showPassword, setShowPassword] = useState(false);
+
+    
     const formik=useFormik({
         initialValues:{
             name:'',
@@ -22,7 +26,15 @@ export default function Registration(){
     return(
         <div>
             <h2>register with us</h2>
-            {serverErrors && <p style={{color:'red'}}>{serverErrors}</p>}
+            {/* {serverErrors && <p style={{color:'red'}}>{serverErrors}</p>} */}
+            {Array.isArray(serverErrors) ? (
+  serverErrors.map((err, i) => (
+    <p key={i} style={{ color: "red" }}>{err.message}</p>
+  ))
+) : (
+  serverErrors && <p style={{ color: "red" }}>{serverErrors}</p>
+)}
+
             <form onSubmit={formik.handleSubmit}>
                 <div>
                     <input
@@ -43,7 +55,7 @@ export default function Registration(){
                     placeholder="enter a email"
                     />
                 </div>
-                <div>
+                {/* <div>
                     <input
                     type="text"
                     name="password"
@@ -51,7 +63,34 @@ export default function Registration(){
                     onChange={formik.handleChange}
                     placeholder="enter a password"
                     />
-                </div>
+                </div> */}
+
+                <div style={{ position: "relative" }}>
+  <input
+    type={showPassword ? "text" : "password"}
+    name="password"
+    value={formik.values.password}
+    onChange={formik.handleChange}
+    placeholder="Enter password"
+    autoComplete="new-password"
+    style={{ paddingRight: "40px" }}
+  />
+
+  <span
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: "absolute",
+      right: "10px",
+      top: "50%",
+      transform: "translateY(-50%)",
+      cursor: "pointer",
+      color: "#fff"
+    }}
+  >
+    {showPassword ? "🙈" : "👁️"}
+  </span>
+</div>
+
                 <div>
                     <input
                     type="text"
@@ -76,18 +115,5 @@ export default function Registration(){
         </div>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

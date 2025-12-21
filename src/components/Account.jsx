@@ -1,18 +1,43 @@
-import { useContext } from "react"
-import UserContext from "../context/UserContext"
+// import { useContext } from "react";
+// import UserContext from "../context/UserContext";
 
-export default function Account(){
-    const{user}=useContext(UserContext);
-    if(!user){
-        return <p>loading...</p>
-    }
-    return(
-        <div>
-            <h2>Account</h2>
-            <p>name -{user.name}</p>
-            <p>email-{user.email}</p>
-            <p>role-{user.role}</p>
-           
-        </div>
-    )
+// export default function Account() {
+//   const { user } = useContext(UserContext);
+
+//   if (!user) return <p>Loading...</p>;
+
+//   return (
+//     <div className="page">
+//       <h2>Account</h2>
+//       <p>Name: {user.name}</p>
+//       <p>Email: {user.email}</p>
+//       <p>Role: {user.role}</p>
+//     </div>
+//   );
+// }
+
+
+import { useContext } from "react";
+import UserContext from "../context/UserContext";
+
+export default function Account() {
+  const { user } = useContext(UserContext);
+
+  if (!user) {
+    return <p style={{ color: "white" }}>Loading account...</p>;
+  }
+
+  return (
+    <div className="dash-container">
+      <h2>My Account</h2>
+
+      <div className="card">
+        <p><b>Name:</b> {user.name}</p>
+        <p><b>Email:</b> {user.email}</p>
+        <p><b>Phone:</b> {user.phone}</p>
+        <p><b>Role:</b> {user.role}</p>
+        <p><b>Login Count:</b> {user.loginCount}</p>
+      </div>
+    </div>
+  );
 }
