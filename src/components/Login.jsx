@@ -24,7 +24,7 @@ export default function Registration(){
     return(
         <div>
             <h2>login  with us</h2>
-            {/* {serverErrors && <p style={{color:'red'}}>{serverErrors}</p>} */}
+            
             {Array.isArray(serverErrors) ? (
   serverErrors.map((err, i) => (
     <p key={i} style={{ color: "red" }}>{err.message}</p>
@@ -45,16 +45,7 @@ export default function Registration(){
                     placeholder="enter a email"
                     />
                 </div>
-                {/* <div>
-                    <input
-                    type="text"
-                    name="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    placeholder="enter a password"
-                    />
-                </div> */}
-
+                
 
                 <div style={{ position: "relative" }}>
   <input

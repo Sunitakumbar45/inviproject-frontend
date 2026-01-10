@@ -1,44 +1,3 @@
-// import { useContext } from "react";
-// import UserContext from "../context/UserContext";
-
-// export default function CustomerDashboard() {
-//   const { user } = useContext(UserContext);
-
-//   return (
-//     <div>
-//       <h2>Customer Dashboard</h2>
-//       <p>Name: {user?.name}</p>
-//       <p>Email: {user?.email}</p>
-//       <p>Phone: {user?.phone}</p>
-//     </div>
-//   );
-// }
-
-
-// import { useContext } from "react";
-// import UserContext from "../context/UserContext";
-// import "../styles/customer.css";
-
-// export default function CustomerDashboard() {
-//   const { user } = useContext(UserContext);
-
-//   if (!user) return <p>Loading...</p>;
-
-//   return (
-//     <div className="customer-container">
-//       <h2>Customer Dashboard</h2>
-
-//       <div className="card">
-//         <p><b>Name:</b> {user.name}</p>
-//         <p><b>Email:</b> {user.email}</p>
-//         <p><b>Phone:</b> {user.phone}</p>
-//         <p><b>Role:</b> {user.role}</p>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 import { useContext, useState,useEffect } from "react";
 import axios from "../config/axios";
 import UserContext from "../context/UserContext";
@@ -95,10 +54,7 @@ export default function CustomerDashboard() {
 };
 
 
-  // 🛑 CUSTOMER CAN ONLY SEE OWN DATA
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
+  
 
   const handleChange = (e) => {
   const { name, value } = e.target;
@@ -108,7 +64,7 @@ export default function CustomerDashboard() {
     [name]: value,
   });
 
-  // 🔥 LIVE ERROR REMOVAL
+  
   const errorMsg = validateField(name, value);
 
   setErrors((prev) => {
@@ -121,57 +77,6 @@ export default function CustomerDashboard() {
   });
 };
 
-
-  // ✅ UPDATE OWN DATA
-  // const handleUpdate = async () => {
-  //   try {
-  //     const res = await axios.put(
-  //       `/update/user/${user._id}`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           Authorization: localStorage.getItem("token"),
-  //         },
-  //       }
-  //     );
-
-  //     alert("Profile updated successfully");
-
-  //     // update context user
-  //     userDispatch({ type: "LOGIN", payload: res.data.selfupdate || res.data.updateUser });
-  //     setEditMode(false);
-  //   } catch (err) {
-  //     alert(err.response?.data?.err || "Update failed");
-  //   }
-  // };
-
-
-//   const handleUpdate = async () => {
-//   try {
-//     const res = await axios.put(
-//       `/update/user/${user._id}`,
-//       formData,
-//       {
-//         headers: {
-//           Authorization: localStorage.getItem("token"),
-//         },
-//       }
-//     );
-
-//     userDispatch({ type: "LOGIN", payload: res.data });
-//     setEditMode(false);
-//     setErrors([]); // clear old errors
-
-//     alert("Profile updated successfully");
-
-//   } catch (err) {
-//     if (Array.isArray(err.response?.data?.errors)) {
-//       setErrors(err.response.data.errors);
-//     } else {
-//       setErrors([err.response?.data?.error || "Update failed"]);
-//     }
-//   }
-// };
 
 
 const handleUpdate = async () => {
@@ -212,8 +117,7 @@ const handleUpdate = async () => {
 };
 
 
-  // ❌ DELETE OWN ACCOUNT
-  const handleDelete = async () => {
+    const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete your account?")) return;
 
     try {
@@ -243,11 +147,20 @@ const handleUpdate = async () => {
           <p><b>Phone:</b> {user.phone}</p>
           <p><b>Role:</b> {user.role}</p>
 
+          <button
+  className="btn"
+  onClick={() => window.location.href = "/user/designs"}
+>
+  View Designs
+</button>
+
           <div className="btn-group">
             <button className="btn" onClick={() => setEditMode(true)}>Edit</button>
             <button className="btn danger" onClick={handleDelete}>Delete</button>
+            </div>
           </div>
-        </div>
+        
+        
       ) : (
         <div className="card">
 
@@ -266,13 +179,7 @@ const handleUpdate = async () => {
             placeholder="Name"
           />
           {errors.name && <p className="error">{errors.name}</p>}
-          {/* <input
-            name="email"
-            value={formData.email}
-            disabled
-          /> */}
-
-
+          
           <input
   name="email"
   value={formData.email}

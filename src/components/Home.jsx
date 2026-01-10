@@ -1,13 +1,3 @@
-// export default function Home(){
-//     return(
-//         <div>
-//             <h2>welcome Home</h2>
-            
-//         </div>
-//     )
-// }
-
-
 import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
 

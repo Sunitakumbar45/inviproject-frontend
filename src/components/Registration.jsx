@@ -55,15 +55,7 @@ export default function Registration(){
                     placeholder="enter a email"
                     />
                 </div>
-                {/* <div>
-                    <input
-                    type="text"
-                    name="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    placeholder="enter a password"
-                    />
-                </div> */}
+                
 
                 <div style={{ position: "relative" }}>
   <input

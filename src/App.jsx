@@ -10,6 +10,14 @@ import { useContext } from "react";
 import UserContext from "./context/UserContext";
 import AdminDashboard from "./components/AdminDashboard";
 import CustomerDashboard from "./components/CustomerDashboard";
+import AdminDesigns from "./pages/admin/AdminDesigns";
+
+import UserDesigns from "./components/UserDesigns";
+import AdminCreateDesign from "./components/AdminCreateDesign";
+
+import DesignDetails from "./components/DesignDetails";
+
+
 
 export default function App(){
   const{isloggedIn,handleLogout,user}=useContext(UserContext);   
@@ -19,19 +27,18 @@ export default function App(){
       <ul>
         <li><Link to="/">    Home  </Link></li>
         {isloggedIn && user?.role === "admin" && (
-  <li><Link to="/admin/dashboard">Admin Dashboard</Link></li>
-)}
-
-{isloggedIn && user?.role === "customer" && (
-  <li><Link to="/customer/dashboard">Customer Dashboard</Link></li>
-)}
+          <li><Link to="/admin/dashboard">Admin Dashboard</Link></li>
+          )}
+        {isloggedIn && user?.role === "customer" && (
+          <li><Link to="/customer/dashboard">Customer Dashboard</Link></li>
+          )}
 
         {isloggedIn &&(
           <>
-          {/* <li><Link to="/dashboard"> Dashboard </Link></li> */}
+          
           <li><Link to="/account"> Account </Link></li>
           
-          {/* <li><button onClick={handleLogout}>logout</button></li> */}
+          
           </>
         )}
 
@@ -47,13 +54,20 @@ export default function App(){
    
       <Routes>
       <Route path="/" element={<Home/>}/>
-      {/* <Route path="/dashboard" element={<Dashboard/>}/> */}
+      
       <Route path="/account" element={<Account/>}/>
       <Route path="/login" element={<Login/>}/>
-      {/* <Route path="/logout" element={<Logout/>}/> */}
+      
       <Route path="/register" element={<Registration/>}/>
       <Route path="/admin/dashboard" element={<AdminDashboard/>}/>
       <Route path="/customer/dashboard" element={<CustomerDashboard/>}/> 
+      <Route path="/admin/designs" element={<AdminDesigns/>}/>
+      <Route path="/user/designs" element={<UserDesigns/>}/>
+      <Route path="/admin/create-design" element={<AdminCreateDesign/>}/>
+      
+      <Route path="/design/:id" element={<DesignDetails/>}/>
+      <Route path="/admin/edit-design/:id" element={<AdminCreateDesign />} /> 
+
       </Routes>
       {isloggedIn && (
         <div className="logout-footer">

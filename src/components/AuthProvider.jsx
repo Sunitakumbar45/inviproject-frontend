@@ -78,14 +78,11 @@ export default function AuthProvider(props){
             
             userDispatch({type:"LOGIN",payload:userResponse.data})
             
-            // AFTER userDispatch({type:"LOGIN", payload: userResponse.data})
-            // AFTER userResponse.data is received
+            
 const loggedInUser = userResponse.data;
 
 userDispatch({ type: "LOGIN", payload: loggedInUser });
-// userDispatch({ type: "CLEAR_SERVER_ERRORS" });
 
-// 🔥 ROLE BASED REDIRECT
 if (loggedInUser.role === "admin") {
   navigate("/admin/dashboard");
 } else {

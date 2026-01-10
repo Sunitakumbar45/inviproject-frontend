@@ -1,11 +1,86 @@
+Card design styles
 .design-card {
   width: 280px;
-  background: linear-gradient(135deg, #ffecd2, #fcb69f);
-  border-radius: 16px;
-  padding: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
 }
 
+.design-card:hover {
+  transform: translateY(-5px);
+}
+
+.design-image {
+  width: 100%;
+  height: 200px;        
+  object-fit: cover;  
+  border-radius: 8px;
+}
+
+.design-body {
+  padding: 15px;
+  text-align: center;
+}
+
+.design-body h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.editable-text {
+  font-size: 14px;
+  color: #666;
+  margin: 6px 0;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c7be5;
+  margin: 8px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn.edit {
+  background: #ffc107;
+}
+
+.btn.order {
+  background: #28a745;
+  color: white;
+}
+
+.btn.danger {
+  background: #dc3545;
+  color: white;
+}
+
+/* Grid */
+.grid {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Image slider */
 .image-slider {
   display: flex;
   overflow-x: auto;
@@ -18,19 +93,247 @@
   border-radius: 12px;
 }
 
-.design-card button {
+/* Design details / order form */
+.design-details-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.design-details-container img {
   width: 100%;
-  margin-top: 10px;
-  background: black;
-  color: white;
-  border: none;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.design-details-container h2 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.design-details-container p {
+  color: #555;
+}
+
+/* Labels */
+.design-details-container label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Inputs, selects, textarea */
+.design-details-container input,
+.design-details-container select,
+.design-details-container textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  color: #333; /* Text color fixed */
+  background-color: #fff; /* Background white so text shows */
+}
+
+.design-details-container input::placeholder,
+.design-details-container textarea::placeholder {
+  color: #999; /* Placeholder visible */
+}
+
+/* Textarea */
+.design-details-container textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Error messages */
+.design-details-container .error {
+  color: #d93025;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+/* Success message */
+.design-details-container .success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Buttons */
+.design-details-container button {
+  width: 100%;
   padding: 10px;
   border-radius: 20px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.design-details-container button:hover {
+  background-color: #218838;
+}
+.actions {
+  pointer-events: auto;
+}
+
+
+
+
+
+
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.design-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.design-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-actions button {
+  margin-right: 10px;
+}
+
+.danger {
+  background: red;
+  color: white;
+}
+.status {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.status.active {
+  background-color: green;
+  color: white;
+}
+
+.status.inActive {
+  background-color: gray;
+  color: white;
+}
+/* DESIGN DETAILS IMAGE FIX */
+.design-details-img {
+  width: 100%;
+  max-width: 450px;     /* control large width */
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 14px;
+  object-fit: contain;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* DETAILS CONTAINER FIX */
+.details-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .design-details-img {
+    max-width: 100%;
+  }
+}
+/* FORCE IMAGE SIZE – OVERRIDE EVERYTHING */
+.image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.design-details-img {
+  width: 350px !important;
+  max-width: 350px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .design-details-img {
+    width: 90% !important;
+    max-width: 90% !important;
+  }
+}
+/* ORDER FORM */
+.order-form {
+  max-width: 450px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.order-form h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.order-form input,
+.order-form textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.order-form textarea {
+  resize: none;
+  height: 90px;
+}
+
+.order-form input::placeholder,
+.order-form textarea::placeholder {
+  color: #999;
+}
+
+.order-form button {
+  background: #6c63ff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
 }
-.grid {
-  display: flex;
-  gap: 25px;
-  flex-wrap: wrap;
-  justify-content: center;
+
+.order-form button:hover {
+  background: #554fd8;
 }
