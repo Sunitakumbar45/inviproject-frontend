@@ -20,13 +20,13 @@ export default function Registration(){
         onSubmit:(values,{resetForm})=>{
             console.log('formdata',values);
             handleRegister(values,resetForm);
-            // resetForm();
+            
         }
     });
     return(
         <div>
             <h2>register with us</h2>
-            {/* {serverErrors && <p style={{color:'red'}}>{serverErrors}</p>} */}
+            
             {Array.isArray(serverErrors) ? (
   serverErrors.map((err, i) => (
     <p key={i} style={{ color: "red" }}>{err.message}</p>

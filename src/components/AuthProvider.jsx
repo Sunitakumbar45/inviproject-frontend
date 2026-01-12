@@ -67,12 +67,12 @@ export default function AuthProvider(props){
       userDispatch({ type: "CLEAR_SERVER_ERRORS" });
         try{
             const response=await axios.post('/user/login',formData);
-            // console.log(response.data);
+            
             localStorage.setItem('token',response.data.token);
             const userResponse=await axios.get('/user/account',{headers :{Authorization:localStorage.getItem('token')}});
             
             
-            // console.log(userResponse.data);
+           
             resetForm();
             alert("successfully login");
             
@@ -91,10 +91,9 @@ if (loggedInUser.role === "admin") {
 
             
 
-            // navigate('/dashboard');
-
+            
         }catch(err){
-            // console.log(err);
+            
             userDispatch({type:"SET_SERVER_ERRORS",payload:err.response.data.error});
         }
      }

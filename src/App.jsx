@@ -11,11 +11,12 @@ import UserContext from "./context/UserContext";
 import AdminDashboard from "./components/AdminDashboard";
 import CustomerDashboard from "./components/CustomerDashboard";
 import AdminDesigns from "./pages/admin/AdminDesigns";
-
 import UserDesigns from "./components/UserDesigns";
 import AdminCreateDesign from "./components/AdminCreateDesign";
-
 import DesignDetails from "./components/DesignDetails";
+import MyOrders from "./components/MyOrders";
+import AdminCustomers from "./components/AdminCustomers";
+import AdminOrders from "./components/AdminOrders";
 
 
 
@@ -64,9 +65,12 @@ export default function App(){
       <Route path="/admin/designs" element={<AdminDesigns/>}/>
       <Route path="/user/designs" element={<UserDesigns/>}/>
       <Route path="/admin/create-design" element={<AdminCreateDesign/>}/>
-      
       <Route path="/design/:id" element={<DesignDetails/>}/>
       <Route path="/admin/edit-design/:id" element={<AdminCreateDesign />} /> 
+      <Route path="/admin/orders" element={<AdminOrders/>}/>
+      <Route path="/customer/orders" element={<MyOrders/>}/>
+      <Route path="/admin/customers" element={<AdminCustomers/>}/>
+
 
       </Routes>
       {isloggedIn && (

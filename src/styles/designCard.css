@@ -72,7 +72,7 @@ Card design styles
   color: white;
 }
 
-/* Grid */
+
 .grid {
   display: flex;
   gap: 25px;
@@ -80,7 +80,7 @@ Card design styles
   justify-content: center;
 }
 
-/* Image slider */
+
 .image-slider {
   display: flex;
   overflow-x: auto;
@@ -93,7 +93,7 @@ Card design styles
   border-radius: 12px;
 }
 
-/* Design details / order form */
+
 .design-details-container {
   max-width: 600px;
   margin: auto;
@@ -121,7 +121,7 @@ Card design styles
   color: #555;
 }
 
-/* Labels */
+
 .design-details-container label {
   display: block;
   margin-top: 12px;
@@ -130,7 +130,7 @@ Card design styles
   color: #333;
 }
 
-/* Inputs, selects, textarea */
+
 .design-details-container input,
 .design-details-container select,
 .design-details-container textarea {
@@ -141,29 +141,29 @@ Card design styles
   margin-bottom: 5px;
   font-size: 14px;
   box-sizing: border-box;
-  color: #333; /* Text color fixed */
-  background-color: #fff; /* Background white so text shows */
+  color: #333; 
+  background-color: #fff; 
 }
 
 .design-details-container input::placeholder,
 .design-details-container textarea::placeholder {
-  color: #999; /* Placeholder visible */
+  color: #999; 
 }
 
-/* Textarea */
+
 .design-details-container textarea {
   min-height: 80px;
   resize: vertical;
 }
 
-/* Error messages */
+
 .design-details-container .error {
   color: #d93025;
   font-size: 13px;
   margin-bottom: 5px;
 }
 
-/* Success message */
+
 .design-details-container .success-message {
   background-color: #d4edda;
   color: #155724;
@@ -175,7 +175,7 @@ Card design styles
   text-align: center;
 }
 
-/* Buttons */
+
 .design-details-container button {
   width: 100%;
   padding: 10px;
@@ -243,10 +243,10 @@ Card design styles
   background-color: gray;
   color: white;
 }
-/* DESIGN DETAILS IMAGE FIX */
+
 .design-details-img {
   width: 100%;
-  max-width: 450px;     /* control large width */
+  max-width: 450px;     
   height: auto;
   display: block;
   margin: 0 auto 20px;
@@ -255,20 +255,20 @@ Card design styles
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* DETAILS CONTAINER FIX */
+
 .details-container {
   max-width: 1100px;
   margin: 40px auto;
   padding: 20px;
 }
 
-/* MOBILE */
+
 @media (max-width: 768px) {
   .design-details-img {
     max-width: 100%;
   }
 }
-/* FORCE IMAGE SIZE – OVERRIDE EVERYTHING */
+
 .image-wrapper {
   width: 100%;
   display: flex;
@@ -285,14 +285,14 @@ Card design styles
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* MOBILE */
+
 @media (max-width: 768px) {
   .design-details-img {
     width: 90% !important;
     max-width: 90% !important;
   }
 }
-/* ORDER FORM */
+
 .order-form {
   max-width: 450px;
   margin: 30px auto;

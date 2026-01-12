@@ -1,19 +1,21 @@
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import axios from "../config/axios";
 import UserContext from "../context/UserContext";
 import "../styles/dashboard.css";
+import { Link } from "react-router-dom";
 
 export default function CustomerDashboard() {
   const { user, userDispatch } = useContext(UserContext);
 
   const [editMode, setEditMode] = useState(false);
-  const [errors, setErrors] = useState({});   // 👈 ADD HERE
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
     phone: user?.phone || "",
   });
+
   useEffect(() => {
     if (editMode && user) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -27,113 +29,68 @@ export default function CustomerDashboard() {
 
   if (!user) return <p>Loading...</p>;
 
-
   const validateField = (name, value) => {
-  let error = "";
+    let error = "";
 
-  if (name === "name") {
-    if (value.trim().length < 4) {
+    if (name === "name" && value.trim().length < 4) {
       error = "Name must be at least 4 characters";
     }
-  }
 
-  if (name === "email") {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      error = "Enter a valid email address";
+    if (name === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        error = "Enter a valid email address";
+      }
     }
-  }
 
-  if (name === "phone") {
-    if (!/^[0-9]{10}$/.test(value)) {
+    if (name === "phone" && !/^[0-9]{10}$/.test(value)) {
       error = "Phone must be exactly 10 digits";
     }
-  }
 
-  return error;
-};
-
-
-  
+    return error;
+  };
 
   const handleChange = (e) => {
-  const { name, value } = e.target;
+    const { name, value } = e.target;
 
-  setFormData({
-    ...formData,
-    [name]: value,
-  });
+    setFormData({ ...formData, [name]: value });
 
-  
-  const errorMsg = validateField(name, value);
+    const errorMsg = validateField(name, value);
 
-  setErrors((prev) => {
-    if (!errorMsg) {
-      // eslint-disable-next-line no-unused-vars
-      const { [name]: removed, ...rest } = prev; // remove error
-      return rest;
-    }
-    return { ...prev, [name]: errorMsg };
-  });
-};
-
-
-
-const handleUpdate = async () => {
-  try {
-    const res = await axios.put(
-      `/update/user/${user._id}`,
-      formData,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
+    setErrors((prev) => {
+      if (!errorMsg) {
+        const {  ...rest } = prev;
+        return rest;
       }
-    );
+      return { ...prev, [name]: errorMsg };
+    });
+  };
 
-    userDispatch({ type: "LOGIN", payload: res.data });
-    setEditMode(false);
-    setErrors({});
-
-    alert("Profile updated successfully");
-
-  } catch (err) {
-    if (Array.isArray(err.response?.data?.errors)) {
-      const fieldErrors = {};
-
-      err.response.data.errors.forEach((msg) => {
-        if (msg.toLowerCase().includes("name")) fieldErrors.name = msg;
-        if (msg.toLowerCase().includes("email")) fieldErrors.email = msg;
-        if (msg.toLowerCase().includes("phone")) fieldErrors.phone = msg;
-      });
-
-      setErrors(fieldErrors);
-    } else {
-      setErrors({
-        general: err.response?.data?.error || "Update failed"
-      });
-    }
-  }
-};
-
-
-    const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete your account?")) return;
-
+  const handleUpdate = async () => {
     try {
-      await axios.delete(`/delete/user/${user._id}`, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
+      const res = await axios.put(`/update/user/${user._id}`, formData, {
+        headers: { Authorization: localStorage.getItem("token") },
       });
 
-      alert("Account deleted");
-      localStorage.removeItem("token");
-      window.location.href = "/";
+      userDispatch({ type: "LOGIN", payload: res.data });
+      setEditMode(false);
+      setErrors({});
+      alert("Profile updated successfully");
     } catch (err) {
-        console.log(err);
-      alert("Delete failed");
+      console.log(err);
+      setErrors({ general: "Update failed" });
     }
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure?")) return;
+
+    await axios.delete(`/delete/user/${user._id}`, {
+      headers: { Authorization: localStorage.getItem("token") },
+    });
+
+    localStorage.removeItem("token");
+    window.location.href = "/";
   };
 
   return (
@@ -147,30 +104,31 @@ const handleUpdate = async () => {
           <p><b>Phone:</b> {user.phone}</p>
           <p><b>Role:</b> {user.role}</p>
 
+          
           <button
-  className="btn"
-  onClick={() => window.location.href = "/user/designs"}
->
-  View Designs
-</button>
+            className="btn"
+            onClick={() => (window.location.href = "/user/designs")}
+          >
+            View Designs
+          </button>
+
+          
+          <Link to="/customer/orders">
+            <button className="btn secondary">My Orders</button>
+          </Link>
 
           <div className="btn-group">
-            <button className="btn" onClick={() => setEditMode(true)}>Edit</button>
-            <button className="btn danger" onClick={handleDelete}>Delete</button>
-            </div>
+            <button className="btn" onClick={() => setEditMode(true)}>
+              Edit
+            </button>
+            <button className="btn danger" onClick={handleDelete}>
+              Delete
+            </button>
           </div>
-        
-        
+        </div>
       ) : (
         <div className="card">
-
-          {errors.length > 0 && (
-          <div className="error-box">
-            {errors.map((e, i) => (
-              <p key={i} className="error">{e}</p>
-            ))}
-          </div>
-        )}
+          {errors.general && <p className="error">{errors.general}</p>}
 
           <input
             name="name"
@@ -179,14 +137,14 @@ const handleUpdate = async () => {
             placeholder="Name"
           />
           {errors.name && <p className="error">{errors.name}</p>}
-          
+
           <input
-  name="email"
-  value={formData.email}
-  onChange={handleChange}
-  placeholder="Email"
-/>
-{errors.email && <p className="error">{errors.email}</p>}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
 
           <input
             name="phone"
@@ -202,11 +160,8 @@ const handleUpdate = async () => {
               Cancel
             </button>
           </div>
-          
         </div>
-        
       )}
-      
     </div>
   );
 }

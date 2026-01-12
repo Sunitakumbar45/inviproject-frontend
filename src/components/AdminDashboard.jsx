@@ -14,6 +14,10 @@ export default function AdminDashboard() {
         <Link to="/admin/designs">
           <button>View All Designs</button>
         </Link>
+
+        <Link to="/admin/orders"><button>View Orders</button></Link>
+        <Link to="/admin/customers"><button>View Customers</button></Link>
+
       </div>
     </div>
   );

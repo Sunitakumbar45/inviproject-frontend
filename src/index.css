@@ -74,16 +74,16 @@ button:focus-visible {
 
 body {
   min-height: 100vh;
-  background-color: #0f172a; /* dark theme */
+  background-color: #0f172a; 
   color: #e5e7eb;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-  /* CENTER EVERYTHING */
+  
   display: flex;
   justify-content: center;
   align-items: center;
 }
 body {
   background-color: #020617;
-  color: #ffffff; /* 🔴 IMPORTANT */
+  color: #ffffff; 
 }
