@@ -27,7 +27,10 @@ export default function AdminCustomers() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    axios.get("/admin/customers")
+    const token=localStorage.getItem("token");
+    axios.get("/admin/customers",{
+      headers:{Authorization:token}
+    })
       .then(res => dispatch({ type: "SUCCESS", payload: res.data }))
       .catch(() => dispatch({ type: "ERROR", payload: "Failed to load customers" }));
   }, []);

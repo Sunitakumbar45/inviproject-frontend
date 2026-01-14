@@ -3,6 +3,7 @@ import axios from "../config/axios";
 import UserContext from "../context/UserContext";
 import "../styles/dashboard.css";
 import { Link } from "react-router-dom";
+import socket from "../socket";
 
 export default function CustomerDashboard() {
   const { user, userDispatch } = useContext(UserContext);
@@ -26,6 +27,45 @@ export default function CustomerDashboard() {
       });
     }
   }, [editMode, user]);
+
+
+
+//   useEffect(() => {
+//   if (user?._id) {
+//     // join customer room
+//     socket.emit("join", user._id);
+
+//     // listen for admin reply
+//     socket.on("order-status", (message) => {
+//       alert("📩 Admin: " + message);
+//     });
+//   }
+
+//   return () => {
+//     socket.off("order-status");
+//   };
+// }, [user]);
+useEffect(() => {
+  if (!user?._id) return;
+
+  console.log("Joining customer room:", user._id);
+
+  // join customer room
+  socket.emit("join", user._id);
+
+  // listen for admin reply
+  const handleOrderStatus = (message) => {
+    console.log("Received order status:", message);
+    alert("📩 Admin: " + message);
+  };
+
+  socket.on("order-status", handleOrderStatus);
+
+  return () => {
+    socket.off("order-status", handleOrderStatus);
+  };
+}, [user?._id]);
+
 
   if (!user) return <p>Loading...</p>;
 
