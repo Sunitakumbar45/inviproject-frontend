@@ -495,14 +495,55 @@ export default function DesignDetails() {
       });
   }, [id]);
 
-  const placeOrder = async () => {
-    try {
-      if (!state.design?._id) {
-        alert("Design not loaded yet");
-        return;
-      }
+  // const placeOrder = async () => {
+  //   try {
+  //     if (!state.design?._id) {
+  //       alert("Design not loaded yet");
+  //       return;
+  //     }
 
-      const response = await axios.post("/api/create/order", {
+  //     const response = await axios.post("/api/create/order", {
+  //       designId: state.design._id,
+  //       eventType: state.eventType,
+  //       quantity: state.quantity,
+  //       paperType: state.paperType,
+  //       size: state.size,
+  //       description: state.description,
+  //       EventDate: state.EventDate
+  //     });
+
+  //     console.log("✅ Order response:", response.data);
+
+  //     dispatch({ type: "ORDER_SUCCESS" });
+  //     alert("🎉 Order placed successfully!");
+  //     navigate("/customer/dashboard");
+
+  //   } catch (err) {
+  //     console.error("❌ Order failed:", err.response?.data);
+
+  //     dispatch({
+  //       type: "ERROR",
+  //       payload: err.response?.data?.message || "Order failed"
+  //     });
+  //   }
+  // };
+  const placeOrder = async () => {
+  try {
+    if (!state.design?._id) {
+      alert("Design not loaded yet");
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("❌ Please login first");
+      return;
+    }
+
+    const response = await axios.post(
+      "/api/create/order",
+      {
         designId: state.design._id,
         eventType: state.eventType,
         quantity: state.quantity,
@@ -510,23 +551,30 @@ export default function DesignDetails() {
         size: state.size,
         description: state.description,
         EventDate: state.EventDate
-      });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`   // ✅ VERY IMPORTANT
+        }
+      }
+    );
 
-      console.log("✅ Order response:", response.data);
+    console.log("✅ Order response:", response.data);
 
-      dispatch({ type: "ORDER_SUCCESS" });
-      alert("🎉 Order placed successfully!");
-      navigate("/customer/dashboard");
+    dispatch({ type: "ORDER_SUCCESS" });
+    alert("🎉 Order placed successfully!");
+    navigate("/customer/dashboard");
 
-    } catch (err) {
-      console.error("❌ Order failed:", err.response?.data);
+  } catch (err) {
+    console.error("❌ Order failed:", err.response?.data || err.message);
 
-      dispatch({
-        type: "ERROR",
-        payload: err.response?.data?.message || "Order failed"
-      });
-    }
-  };
+    dispatch({
+      type: "ERROR",
+      payload: err.response?.data?.error || "Order failed"
+    });
+  }
+};
+
 
   if (state.loading) return <p>Loading...</p>;
   if (state.error) return <p style={{ color: "red" }}>{state.error}</p>;

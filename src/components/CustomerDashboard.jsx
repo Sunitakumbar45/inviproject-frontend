@@ -5,6 +5,7 @@ import "../styles/dashboard.css";
 import { Link } from "react-router-dom";
 import socket from "../socket";
 
+
 export default function CustomerDashboard() {
   const { user, userDispatch } = useContext(UserContext);
 
@@ -17,16 +18,21 @@ export default function CustomerDashboard() {
     phone: user?.phone || "",
   });
 
-  useEffect(() => {
-    if (editMode && user) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setFormData({
-        name: user.name || "",
-        email: user.email || "",
-        phone: user.phone || "",
-      });
-    }
-  }, [editMode, user]);
+   useEffect(() => {
+    if (!user?._id) return;
+
+    console.log("👤 Customer joined room:", user._id);
+    socket.emit("join-customer", user._id);
+
+    socket.on("customer-notification", (message) => {
+      console.log("📩 Message from admin:", message);
+      alert("📩 Admin: " + message);
+    });
+
+    return () => {
+      socket.off("customer-notification");
+    };
+  }, [user?._id]);
 
 
 
@@ -45,26 +51,47 @@ export default function CustomerDashboard() {
 //     socket.off("order-status");
 //   };
 // }, [user]);
-useEffect(() => {
-  if (!user?._id) return;
+// useEffect(() => {
+//   if (!user?._id) return;
 
-  console.log("Joining customer room:", user._id);
+//   console.log("Joining customer room:", user._id);
 
-  // join customer room
-  socket.emit("join", user._id);
+//   // join customer room
+//   socket.emit("join", user._id);
 
-  // listen for admin reply
-  const handleOrderStatus = (message) => {
-    console.log("Received order status:", message);
-    alert("📩 Admin: " + message);
-  };
+//   // listen for admin reply
+//   const handleOrderStatus = (message) => {
+//     console.log("Received order status:", message);
+//     alert("📩 Admin: " + message);
+//   };
 
-  socket.on("order-status", handleOrderStatus);
+//   socket.on("order-status", handleOrderStatus);
 
-  return () => {
-    socket.off("order-status", handleOrderStatus);
-  };
-}, [user?._id]);
+//   return () => {
+//     socket.off("order-status", handleOrderStatus);
+//   };
+// }, [user?._id]);
+
+// useEffect(() => {
+//   if (!user?._id) return;
+
+//   console.log("👤 Joining customer room:", user._id);
+
+//   // ✅ Join customer room
+//   socket.emit("join-customer", user._id);
+
+//   // ✅ Listen for admin reply
+//   const handleNotification = (message) => {
+//     console.log("📩 Message from admin:", message);
+//     alert("📩 Admin: " + message);
+//   };
+
+//   socket.on("customer-notification", handleNotification);
+
+//   return () => {
+//     socket.off("customer-notification", handleNotification);
+//   };
+// }, [user?._id]);
 
 
   if (!user) return <p>Loading...</p>;
