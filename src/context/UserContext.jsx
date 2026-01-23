@@ -1,7 +1,4 @@
 
-// import { createContext } from "react";
-// const UserContext=createContext();
-// export default UserContext;
 
 
 import { createContext, useState } from "react";
@@ -16,7 +13,7 @@ export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [serverErrors, setServerErrors] = useState("");
 
-  // ✅ LOGIN FUNCTION
+  
   const handleLogin = async (formData, resetForm) => {
     try {
       const response = await axios.post("/users/login", formData);
@@ -25,11 +22,11 @@ export const UserProvider = ({ children }) => {
 
       const { token, user } = response.data;
 
-      // ✅ Save token and user in localStorage
+      
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // ✅ Update state
+      
       setUser(user);
       setIsLoggedIn(true);
       setServerErrors("");
@@ -48,7 +45,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // ✅ LOGOUT FUNCTION
+  
   const handleLogout = () => {
     localStorage.clear();
     setUser(null);
