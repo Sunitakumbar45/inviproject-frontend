@@ -28,6 +28,10 @@ export default function AdminDashboard() {
         <button onClick={() => navigate("/admin/payments")}>
   💰 View Payments
 </button>
+<button onClick={() => navigate("/admin/ratings")}>
+  ⭐ View Ratings
+</button>
+
 
 
         

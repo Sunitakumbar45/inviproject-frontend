@@ -18,6 +18,9 @@ import MyOrders from "./components/MyOrders";
 import AdminCustomers from "./components/AdminCustomers";
 import AdminOrders from "./components/AdminOrders";
 import AdminPayments from "./pages/admin/AdminPayments";
+import AdminRatings from "./pages/admin/AdminRatings";
+
+
 
 
 
@@ -72,6 +75,11 @@ export default function App(){
       <Route path="/customer/orders" element={<MyOrders/>}/>
       <Route path="/admin/customers" element={<AdminCustomers/>}/>
       <Route path="/admin/payments" element={<AdminPayments/>}/>
+      <Route path="/admin/ratings"element={<AdminRatings />}/>
+
+
+
+      
 
 
       </Routes>

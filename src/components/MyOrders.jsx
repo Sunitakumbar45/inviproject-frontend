@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../config/axios";
+import RatingBox from "./RatingBox";
 
 
 export default function MyOrders() {
@@ -148,7 +149,7 @@ export default function MyOrders() {
                 <p><b>Total Amount:</b> ₹{order.totalPrice}</p>
                 <p><b>Status:</b> {order.orderStatus}</p>
 
-                {order.orderStatus === "pending" ? (
+                {/* {order.orderStatus === "pending" ? (
                   <>
                     <button onClick={() => startEdit(order)}>Edit</button>
                     <button onClick={() => deleteOrder(order._id)}>
@@ -159,7 +160,30 @@ export default function MyOrders() {
                   <p style={{ color: "red" }}>
                     Editing disabled (Printing started)
                   </p>
-                )}
+                )} */}
+
+                {order.orderStatus === "pending" && (
+  <>
+    <button onClick={() => startEdit(order)}>Edit</button>
+    <button onClick={() => deleteOrder(order._id)}>Delete</button>
+  </>
+)}
+
+{order.orderStatus !== "pending" &&
+ order.orderStatus !== "delivered" && (
+  <p style={{ color: "red" }}>
+    Editing disabled (Printing started)
+  </p>
+)}
+
+
+                {order.orderStatus === "delivered" && (
+  <RatingBox
+    orderId={order._id}
+    designTitle={order.design?.title}
+  />
+)}
+
 
                 
 

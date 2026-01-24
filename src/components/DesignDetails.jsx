@@ -154,7 +154,7 @@ const openRazorpay = async (paymentData) => {
 
   
   setReceiptUrl(fullReceiptUrl);
-  navigate("/customer/dashboard");
+  // navigate("/customer/dashboard");
 
 
 
