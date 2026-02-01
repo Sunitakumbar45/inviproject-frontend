@@ -40,6 +40,21 @@ export default function UserDesigns() {
 
   return (
     <div className="design-grid">
+      <button
+  onClick={() => window.history.back()}
+  style={{
+    marginBottom: "15px",
+    padding: "6px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
+
       {state.designs.map(d => (
         <div key={d._id} className="design-card">
           <img src={d.image[0]} alt={d.title} />

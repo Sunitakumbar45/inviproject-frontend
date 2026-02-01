@@ -37,6 +37,21 @@ export default function AdminDesigns() {
 
   return (
     <div className="design-grid">
+      <button
+  onClick={() => window.history.back()}
+  style={{
+    marginBottom: "15px",
+    padding: "6px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
+
       {designs.map((d) => (
         <DesignCard
           key={d._id}

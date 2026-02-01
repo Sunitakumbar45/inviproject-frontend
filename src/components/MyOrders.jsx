@@ -77,6 +77,21 @@ export default function MyOrders() {
   return (
     <div style={{ padding: "20px" }}>
       <h2>🧾 My Orders</h2>
+      <button
+  onClick={() => window.history.back()}
+  style={{
+    marginBottom: "15px",
+    padding: "6px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
+
 
       {orders.map((order) => {
         const pricePerCard = order.design?.prize || 0;

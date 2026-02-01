@@ -20,11 +20,12 @@ export const UserProvider = ({ children }) => {
 
       console.log("Login response:", response.data);
 
-      const { token, user } = response.data;
+      const { token,user} = response.data;
 
       
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
+      // localStorage.setItem("role",role);
 
       
       setUser(user);

@@ -11,6 +11,21 @@ export default function Account() {
   return (
     <div className="dash-container">
       <h2>My Account</h2>
+      <button
+  onClick={() => window.history.back()}
+  style={{
+    marginBottom: "15px",
+    padding: "6px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
+
 
       <div className="card">
         <p><b>Name:</b> {user.name}</p>

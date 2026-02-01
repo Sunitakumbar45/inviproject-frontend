@@ -3,6 +3,22 @@ import "../styles/designCard.css";
 export default function DesignCard({ design, onEdit, onDelete }) {
   return (
     <div className="design-card">
+      <button
+  onClick={() => window.history.back()}
+  style={{
+    marginBottom: "15px",
+    padding: "6px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
+
+      
       <img src={design.image[0]} alt={design.title} />
 
       <h3>{design.title}</h3>

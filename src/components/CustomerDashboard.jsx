@@ -86,6 +86,7 @@ export default function CustomerDashboard() {
 
   return (
     <div className="dash-container">
+      
       <h2>Customer Dashboard</h2>
 
       {!editMode ? (

@@ -66,6 +66,21 @@ export default function AdminCreateDesign() {
 
   return (
     <div className="form-box">
+      <button
+  onClick={() => window.history.back()}
+  style={{
+    marginBottom: "15px",
+    padding: "6px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
+
       <h2>{isEdit ? "Edit Design" : "Create Design"}</h2>
 
       <input

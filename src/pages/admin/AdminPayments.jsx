@@ -42,6 +42,21 @@ if (loading) {
   
   return (
     <div style={{ padding: "20px" }}>
+      <button
+  onClick={() => window.history.back()}
+  style={{
+    marginBottom: "15px",
+    padding: "6px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
+
       <h2>💰 Admin Payments Dashboard</h2>
 
       <table border="1" cellPadding="10" width="100%">

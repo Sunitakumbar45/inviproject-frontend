@@ -190,6 +190,21 @@ const openRazorpay = async (paymentData) => {
 
   return (
     <div className="details-container">
+      <button
+  onClick={() => window.history.back()}
+  style={{
+    marginBottom: "15px",
+    padding: "6px 12px",
+    borderRadius: "6px",
+    border: "none",
+    background: "#2563eb",
+    color: "white",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
+
       <img
         src={d.image?.[0]}
         alt={d.title}
