@@ -226,7 +226,7 @@ input[type="submit"]:hover {
 
 .app-container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   min-height: 90vh;
 
   background: #020617;
@@ -256,4 +256,6 @@ table th {
 table tr:nth-child(even) {
   background-color: #1f1d1d;
 }
+
+
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../../config/axios";
 
+
 export default function AdminPayments() {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,9 @@ export default function AdminPayments() {
 if (loading) {
   return <h2 style={{ textAlign: "center" }}>Loading payments...</h2>;
 }
+
+
+
 
 
   
