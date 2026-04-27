@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3054",
+  // baseURL: "http://localhost:3054",
+  baseURL:"https://inviprint-1.onrender.com",
+  
 });
 
 
